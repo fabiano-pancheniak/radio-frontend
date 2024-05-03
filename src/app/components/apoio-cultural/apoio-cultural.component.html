@@ -1,0 +1,24 @@
+<form [formGroup]="servicoItems" (ngSubmit)="onAddItem()">    
+    <select name="select" formControlName="servicoId" (change)="onChangeServico($event.target)">
+        <option *ngFor="let servico of servicosList" value={{servico.id}}>{{servico.descricao}} (R$ {{servico.valor}},00)</option>
+    </select>
+    
+    <input placeholder="quantidade" type="number" min="1" formControlName="quantidade" (change)="onChangeQuantidade($event.target)"/>
+    
+    <div>
+        <label for="value">Valor</label>
+        <input id="value" value="{{this.servicoItems.get('valor')?.value}}" [readOnly]="true"/>
+    </div>
+    <div>
+        <label for="arquivo">Arquivo</label>
+        <input type="file" id="arquivo" id="arquivo"/>
+    </div>
+    <button>Adicionar item</button>
+</form>
+<div *ngFor="let servico of selectedServices">
+    <div>Descrição: {{servico.descricao}}</div>
+    <div>Quantidade: {{servico.quantidade}}</div>
+    <div>Valor Unitário: {{servico.valorUnitario}}</div>
+    <div>Valor Total: {{servico.valor}}</div>
+</div>
+<button (click)="createOrdemServico()">Enviar</button>
