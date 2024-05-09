@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { DeferirService } from '../../services/deferir.service';
+import { DeferirService } from '../../../services/deferir.service';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -28,6 +28,10 @@ export class DeferirComponent {
   }
   
   getOrdemServicoDetails(e: any) {
-    this.router.navigate([`/ordem-servico/${e.target.id}`])
+    this.router.navigate([`/deferir/${e.target.id}`])
+  }
+
+  convertToBRL(value: String){
+    return `R$ ${value},00`
   }
 }

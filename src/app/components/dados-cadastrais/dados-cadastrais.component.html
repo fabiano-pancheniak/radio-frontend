@@ -1,0 +1,49 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="dados-cadastrais-form">
+    <div class="form-sections">
+        <div class="about">
+            <label for="cpf-cnpj">CPF / CNPJ</label>
+            <input id="cpf-cnpj" type="text" formControlName="cpfCnpj">
+        
+            <label for="full-name">Nome completo: </label>
+            <input id="full-name" type="text" formControlName="fullName">
+
+            <label for="phone">Contato: </label>
+            <input id="phone" type="text" formControlName="phone">       
+        </div>
+
+        <div class="address">
+            <label for="cep">CEP: </label>
+            <input id="cep" type="text" formControlName="cep" (blur)="consultaCEP($event)">
+
+            <div class="number-address">
+                <div class="address">   
+                    <label for="address">Endereço: </label>
+                    <input id="address" type="text" formControlName="address" [value]="profileForm.value.address"> 
+                </div>
+                <div class="number">
+                    <label for="number">Número: </label>
+                    <input id="number" type="text" formControlName="number">
+                </div>
+            </div>
+        
+            <label for="district">Bairro: </label>
+            <input id="district" type="text" formControlName="district" [value]="profileForm.value.district">
+
+            <div class="city-state">
+                <div class="city">
+                    <label for="city">Cidade: </label>
+                    <input id="city" type="text" formControlName="city" [value]="profileForm.value.city">
+                </div>
+                <div class="state">
+                    <label for="state">Estado: </label>
+                    <select id="state" formControlName="state" [value]="profileForm.value.state">
+                        <option *ngFor="let estado of estadosList" value={{estado.sigla}}>{{estado.sigla}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-wrapper">
+        <button>Salvar</button>
+    </div>
+</form>

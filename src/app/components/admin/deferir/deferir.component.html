@@ -1,16 +1,15 @@
 <table>
     <tr>
-      <th>id</th>
-      <th>user</th>
-      <th>created at</th>
-      <th>deferido</th>
-      <th></th>
+      <th>Email</th>
+      <th>Data criação</th>
+      <th>Deferido</th>
+      <th>Subtotal</th>
     </tr>
     <tr *ngFor="let ordemServico of ordensServicoList">
-      <td>{{ordemServico.id}}</td>
       <td>{{ordemServico.userId.email}}</td>
       <td>{{ordemServico.createdAt}}</td>
-      <td>{{ordemServico.deferido}}</td>
+      <td>{{ordemServico.situacaoId.descricao}}</td>
+      <td>{{convertToBRL(ordemServico.subtotal)}}</td>
       <td>
         <button id={{ordemServico.id}} (click)="getOrdemServicoDetails($event)">
             Visualizar   

@@ -1,0 +1,25 @@
+<div class="items-wrapper">
+    <table class="tb-items">
+        <tr>
+            <th>Descricao</th>
+            <th>Serviço</th>
+            <th>Valor</th>
+            <th>Quantidade</th>
+            <th>Arquivos</th>
+        </tr>
+        <tr *ngFor="let ordemServicoItem of ordemServicoItemsList">
+            <td>{{ordemServicoItem.descricao}}</td>
+            <td>{{ordemServicoItem.servicoId.descricao}}</td>
+            <td>{{ordemServicoItem.servicoId.valor}}</td>
+            <td>{{ordemServicoItem.quantidade}}</td>
+            <td>
+            <button value={{ordemServicoItem.arquivo}} (click)="downloadFile($event)">Visualizar arquivo</button>
+            </td>
+        </tr>
+    </table>
+    <input type="text" placeholder="observacao">
+    <div>
+        <button>Deferir</button>
+        <button>Não deferir</button>
+    </div>
+</div>

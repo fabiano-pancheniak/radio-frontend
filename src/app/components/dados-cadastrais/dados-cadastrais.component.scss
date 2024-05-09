@@ -1,0 +1,48 @@
+.dados-cadastrais-form{ 
+    margin: 16px auto;
+    max-width: 800px;
+    label{
+        font-size: 1rem;
+    }
+    input, select{
+        font-size: 1rem;
+        margin: 4px 0;
+        padding: 8px;
+        border: none;
+        border-bottom: solid 1px black;
+    }
+    select{
+        padding: 7px;
+    }
+    .form-sections{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        .about{
+            display: flex;
+            flex-direction: column;
+        }
+        .address{
+            display: flex;
+            flex-direction: column;
+
+            .number-address, .city-state{
+                display: grid;
+                grid-template-columns: 4fr 1fr;
+                gap: 8px;
+
+                .state, .city, .address, .number{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+            }
+        }     
+    }
+
+    .button-wrapper{
+        display: flex;
+        justify-content: end;
+        margin: 16px 0;    
+    }
+}

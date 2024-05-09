@@ -2,12 +2,13 @@ import { Component, inject } from '@angular/core';
 import { ApoioCulturalService } from '../../services/apoio-cultural.service';
 import { NgFor } from '@angular/common';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-apoio-cultural',
   standalone: true,
   imports: [NgFor, ReactiveFormsModule],
-  providers: [{ provide: ApoioCulturalService}],
+  providers: [{ provide: ApoioCulturalService}, {provide: AuthService}],
   templateUrl: './apoio-cultural.component.html',
   styleUrl: './apoio-cultural.component.scss'
 })
@@ -18,7 +19,9 @@ export class ApoioCulturalComponent{
   servicosList: any = []
   selectedServices: any = []
   apoioCulturalService = inject(ApoioCulturalService);
+  authService = inject(AuthService)
   filesToUpload: any = []
+  token = localStorage.getItem('access-token')
     
   servicoItems = new FormGroup({
     quantidade: new FormControl(1),
@@ -33,11 +36,13 @@ export class ApoioCulturalComponent{
   initialValues = this.servicoItems.value;
 
   getServicos(){
-    this.apoioCulturalService.getServicos().subscribe({
-      next: (value) => { 
-        this.servicosList = value
-       }
-    }) 
+    if(this.token){
+      this.apoioCulturalService.getServicos(this.token).subscribe({
+        next: (value) => { 
+          this.servicosList = value
+         }
+      }) 
+    }
   } 
   
   createOrdemServico() {

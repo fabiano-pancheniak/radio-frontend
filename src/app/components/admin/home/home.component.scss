@@ -1,0 +1,31 @@
+.admin-wrapper{
+    height: 100%;
+}
+.header{
+    border-bottom: solid 1px black;
+    height: 48px;
+    z-index: 1/0; /* header has z-index: 0, content has z-index: 1 */
+    position: relative; /* to 'activate' z-index 'behavior' */
+    background-color: white;
+}
+
+.page{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    .side-menu{
+        margin-top: -48px;
+        padding-top: 48px;
+        height: 100%;
+        width: 300px;
+        background-color: beige;
+        border: solid 1px black;
+    }
+    
+    .content{
+        margin-top: -48px;
+        padding-top: 48px;
+        height: 100%;
+        border: solid 1px red;
+    }
+}
