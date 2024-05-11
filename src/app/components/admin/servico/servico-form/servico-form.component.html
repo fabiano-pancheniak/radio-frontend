@@ -1,0 +1,9 @@
+<form [formGroup]="servicoForm" (submit)="onSubmit()">
+    <label for="descricao">Descrição</label>
+    <input id="descricao" type="text" formControlName="descricao">
+    <label for="valor">Valor</label>
+    <input id="valor" type="text" formControlName="valor">
+    <label for="observacao">Observação</label>
+    <input id="observacao" type="text" formControlName="observacao">
+    <button>Enviar</button>
+</form>

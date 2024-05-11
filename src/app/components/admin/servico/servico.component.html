@@ -1,0 +1,14 @@
+<table>
+    <tr>
+      <th class="actions-column"></th>
+      <th>Descrição</th>
+      <th>Observação</th>
+      <th>Valor</th>
+    </tr>
+    <tr *ngFor="let servico of servicosList">
+      <td class="actions-column"><button [value]="servico.id" (click)="onEdit($event)">Editar</button></td>
+      <td>{{servico.descricao}}</td>
+      <td>{{servico.observacao}}</td>
+      <td>{{servico.valor}}</td>
+    </tr>
+</table>

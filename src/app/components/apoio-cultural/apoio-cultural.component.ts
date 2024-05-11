@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { ApoioCulturalService } from '../../services/apoio-cultural.service';
+import { ApoioCulturalService } from '../../services/ordem-servico/apoio-cultural.service';
 import { NgFor } from '@angular/common';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { ServicoService } from '../../services/ordem-servico/servico.service';
 
 @Component({
   selector: 'app-apoio-cultural',
@@ -20,6 +21,7 @@ export class ApoioCulturalComponent{
   selectedServices: any = []
   apoioCulturalService = inject(ApoioCulturalService);
   authService = inject(AuthService)
+  servicoService = inject(ServicoService)
   filesToUpload: any = []
   token = localStorage.getItem('access-token')
     
@@ -37,7 +39,7 @@ export class ApoioCulturalComponent{
 
   getServicos(){
     if(this.token){
-      this.apoioCulturalService.getServicos(this.token).subscribe({
+      this.servicoService.getServicos().subscribe({
         next: (value) => { 
           this.servicosList = value
          }

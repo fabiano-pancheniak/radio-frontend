@@ -8,6 +8,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { HomeComponent } from './components/admin/home/home.component';
 import { adminGuard, userGuard } from './guard/admin.guard';
 import { AuthComponent } from './components/auth/auth/auth.component';
+import { ServicoComponent } from './components/admin/servico/servico.component';
+import { ServicoFormComponent } from './components/admin/servico/servico-form/servico-form.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -20,5 +22,7 @@ export const routes: Routes = [
     {path: 'admin', component: HomeComponent, canActivate: [adminGuard], children: [
         {path: 'deferir', component: DeferirComponent},
         {path: 'deferir/:id', component: OrdemServicoComponent},
+        {path: 'servico', component: ServicoComponent},
+        {path: 'servico-form', component: ServicoFormComponent}
     ]}
 ];

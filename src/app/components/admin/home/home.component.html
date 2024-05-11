@@ -2,19 +2,25 @@
     <header class="header">
         Radio
     </header>
-    <div class="page">
-        <div class="side-menu">
-            <details>
-                <summary>
-                    Cadastros
-                </summary>
-                <p>Cadastro serviço</p> 
-                <p>Cadastro locutor</p> 
-                <p>Cadastro rádio</p> 
-            </details>
-        </div>
-        <div class="content">
-            <router-outlet></router-outlet>
-        </div>
+    <div class="side-menu">
+        <details>
+            <summary>
+                Cadastros
+            </summary>
+            <div class="options">
+                <p>
+                    <a [routerLink]="['servico']">Cadastro serviço</a>
+                </p> 
+                <p>
+                    <a>Cadastro locutor</a>
+                </p> 
+                <p>
+                    <a>Cadastro rádio</a>
+                </p>
+            </div>
+        </details>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
     </div>
 </div>
