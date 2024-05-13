@@ -1,3 +1,25 @@
-.actions-column{
-    width: min-content;
+.table-wrapper{
+    width: 80%;
+    margin: auto;
+}
+  
+.mat-column-id {
+    width: 32px;
+    border-right: 1px solid currentColor;
+    padding-right: 24px;
+    text-align: center;
+}
+
+.mat-column-descricao {
+    padding-left: 16px;
+    font-size: 20px;
+}
+  
+.mat-column-valor {
+    width: 32px;
+    font-style: italic;
+}
+  
+.mat-column-observacao {
+    text-align: center;
 }
