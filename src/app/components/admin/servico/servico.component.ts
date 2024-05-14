@@ -4,26 +4,36 @@ import { Servico } from '../../../interfaces/servico';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {
+    MatDialog,
+    MatDialogRef,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+  } from '@angular/material/dialog';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
     selector: 'app-servico',
     standalone: true,
     templateUrl: './servico.component.html',
     styleUrl: './servico.component.scss',
-    imports: [NgFor, MatTableModule],
+    imports: [NgFor, MatTableModule, MatButtonModule],
     providers: [{provide: ServicoService}]
 })
 export class ServicoComponent {
     displayedColumns: string[] = ['id', 'descricao', 'observacao', 'valor'];
-    constructor(private router: Router){
+    constructor(private router: Router, public dialog: MatDialog){
         this.getServicos()
+        
     }
     servicoService = inject(ServicoService)
     servicosList: Servico[] = []
     
     getServicos(){
         this.servicoService.getServicos().subscribe((response) => {
-            console.log(response)
             this.servicosList = response
         })
     }
@@ -31,5 +41,27 @@ export class ServicoComponent {
     onEdit(e: any){
         this.router.navigate(['admin/servico-form'], { queryParams: { servico: e.target.value } });  
     }
+
+    openDialog(enterAnimationDuration: string, exitAnimationDuration: string, e: any): void {
+        const dialogRef = this.dialog.open(DialogComponent, {
+          width: '250px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+          data: e.target.value
+        });
+
+        dialogRef.componentInstance.servicoDeleted.subscribe(() => {
+            // Perform necessary actions in the parent component after servico deletion
+            this.getServicos() // Example: Reload the page
+        });
+    }
+
+      
+
+    onClick(){
+        this.router.navigate(['admin/servico-form'])
+    }
 } 
+
+
 

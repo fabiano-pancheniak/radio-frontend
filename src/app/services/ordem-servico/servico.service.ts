@@ -34,4 +34,9 @@ export class ServicoService {
     return this.http.put<Servico>(`${this.URL}/${servicoId}`, body, {headers})
   }
 
+  deleteServico(servicoId: string){
+    const headers = this.authService.getHeadersToken()
+    return this.http.delete<Servico>(`${this.URL}/${servicoId}`, {headers})
+  }
+
 }

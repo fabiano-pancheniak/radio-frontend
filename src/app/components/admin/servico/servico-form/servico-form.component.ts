@@ -1,17 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicoService } from '../../../../services/ordem-servico/servico.service';
-import { Servico } from '../../../../interfaces/servico';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CommonModule } from '@angular/common';
-import {
-  MatSnackBar,
-  MatSnackBarAction,
-  MatSnackBarActions,
-  MatSnackBarLabel,
-  MatSnackBarRef,
-} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
@@ -20,7 +12,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   selector: 'app-servico-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatSnackBarModule, CommonModule, MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule],
+  imports: 
+  [
+    ReactiveFormsModule, 
+    MatSnackBarModule, 
+    MatFormFieldModule, 
+    FormsModule, 
+    MatInputModule, 
+    MatButtonModule, 
+    MatFormFieldModule
+  ],
   providers: [{provide: ServicoService}],
   templateUrl: './servico-form.component.html',
   styleUrl: './servico-form.component.scss'
@@ -39,8 +40,8 @@ export class ServicoFormComponent {
   servicoId: string | null = this.route.snapshot.queryParams['servico'] || null
   servicoService = inject(ServicoService)
   servicoForm = new FormGroup({
-    descricao: new FormControl(''),
-    valor: new FormControl(''),
+    descricao: new FormControl('', Validators.required),
+    valor: new FormControl('', Validators.required),
     observacao: new FormControl('')
   })
 
@@ -48,7 +49,7 @@ export class ServicoFormComponent {
     if(this.servicoId){
       this.servicoService.updateServico(this.servicoId, this.servicoForm.value).subscribe(
         res => {
-          this._snackBar.open("Serviço atualizado atualizado", '', {
+          this._snackBar.open("Serviço atualizado", '', {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'bottom',
@@ -63,8 +64,13 @@ export class ServicoFormComponent {
           horizontalPosition: 'right',
           verticalPosition: 'bottom',
         })
+        
         this.router.navigate(['admin/servico'])
       })
+  }
+
+  voltar(){
+    this.router.navigate(['admin/servico'])
   }
 
   openSnackBar(message: string, action: string) {

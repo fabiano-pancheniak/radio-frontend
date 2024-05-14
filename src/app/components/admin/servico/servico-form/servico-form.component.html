@@ -1,9 +1,20 @@
-<form [formGroup]="servicoForm" (submit)="onSubmit()">
-    <label for="descricao">Descrição</label>
-    <input id="descricao" type="text" formControlName="descricao" [value]="servicoForm.value.descricao">
-    <label for="valor">Valor</label>
-    <input id="valor" type="text" formControlName="valor" [value]="servicoForm.value.valor">
-    <label for="observacao">Observação</label>
-    <input id="observacao" type="text" formControlName="observacao" [value]="servicoForm.value.observacao">
-    <button>Enviar</button>
-</form>
+<div class="form-wrapper">
+    <form [formGroup]="servicoForm" class="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Descrição</mat-label>
+            <input matInput formControlName="descricao" [value]="servicoForm.value.descricao">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Valor</mat-label>
+            <input matInput formControlName="valor" [value]="servicoForm.value.valor">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Observação</mat-label>
+            <textarea matInput formControlName="observacao" [value]="servicoForm.value.observacao"></textarea>
+        </mat-form-field>
+        <div class="options">
+            <button mat-flat-button color="primary" (click)="onSubmit()">Salvar</button>
+            <button mat-flat-button color="accent" (click)="voltar()">Voltar</button>
+        </div>
+    </form>
+</div>

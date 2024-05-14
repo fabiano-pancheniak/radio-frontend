@@ -1,0 +1,12 @@
+.form-wrapper{
+    max-width: 600px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    .options{
+        display: flex;
+        gap: 4px;
+    }
+}

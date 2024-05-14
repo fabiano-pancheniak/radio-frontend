@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Remover registro</h2>
+<mat-dialog-content>
+  Confirma a exclusão de "{{currServico.descricao}}"
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="deleteServico(data)">Remover</button>
+</mat-dialog-actions>   
