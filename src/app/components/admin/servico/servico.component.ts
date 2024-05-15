@@ -51,12 +51,9 @@ export class ServicoComponent {
         });
 
         dialogRef.componentInstance.servicoDeleted.subscribe(() => {
-            // Perform necessary actions in the parent component after servico deletion
-            this.getServicos() // Example: Reload the page
+            this.getServicos()
         });
     }
-
-      
 
     onClick(){
         this.router.navigate(['admin/servico-form'])

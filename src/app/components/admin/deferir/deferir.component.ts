@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { DeferirService } from '../../../services/deferir.service';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-deferir',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, MatTableModule],
   providers: [{provide: DeferirService}],
   templateUrl: './deferir.component.html',
   styleUrl: './deferir.component.scss'
@@ -17,6 +18,7 @@ export class DeferirComponent {
   }
   deferirService = inject(DeferirService)
   ordensServicoList: any = []
+  displayedColumns: string[] = ['id', 'Email', 'Data criação', 'Deferido', 'Subtotal'];
 
   getOrdensServico(){
     this.deferirService.getOrdensServico().subscribe({
@@ -28,7 +30,7 @@ export class DeferirComponent {
   }
   
   getOrdemServicoDetails(e: any) {
-    this.router.navigate([`/deferir/${e.target.id}`])
+    this.router.navigate([`admin/deferir/${e.target.id}`])
   }
 
   convertToBRL(value: String){

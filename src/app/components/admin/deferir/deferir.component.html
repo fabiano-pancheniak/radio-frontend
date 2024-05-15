@@ -1,21 +1,33 @@
-<table>
-    <tr>
-      <th>Email</th>
-      <th>Data criação</th>
-      <th>Deferido</th>
-      <th>Subtotal</th>
-    </tr>
-    <tr *ngFor="let ordemServico of ordensServicoList">
-      <td>{{ordemServico.userId.email}}</td>
-      <td>{{ordemServico.createdAt}}</td>
-      <td>{{ordemServico.situacaoId.descricao}}</td>
-      <td>{{convertToBRL(ordemServico.subtotal)}}</td>
-      <td>
-        <button id={{ordemServico.id}} (click)="getOrdemServicoDetails($event)">
-            Visualizar   
-        </button>
+<div class="table-wrapper">
+  <table mat-table [dataSource]="ordensServicoList" class="mat-elevation-z2">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> 
+        <button [id]="element.id" (click)="getOrdemServicoDetails($event)" class="pointer">Visualizar</button>
       </td>
-    </tr>
-    <tr *ngFor="let ordemServico of ordensServicoList">
-    </tr>
-</table>
+    </ng-container>
+
+    <ng-container matColumnDef="Email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element" [id]="element.id" (click)="getOrdemServicoDetails($event)" class="pointer"> {{element.userId.email}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Data criação">
+      <th mat-header-cell *matHeaderCellDef> Data criação </th>
+      <td mat-cell *matCellDef="let element" [id]="element.id" (click)="getOrdemServicoDetails($event)" class="pointer"> {{element.createdAt}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Deferido">
+      <th mat-header-cell *matHeaderCellDef> Situação </th>
+      <td mat-cell *matCellDef="let element" [id]="element.id" (click)="getOrdemServicoDetails($event)" class="pointer"> {{element.situacaoId.descricao}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Subtotal">
+      <th mat-header-cell *matHeaderCellDef> Subtotal </th>
+      <td mat-cell *matCellDef="let element" [id]="element.id" (click)="getOrdemServicoDetails($event)" class="pointer"> {{convertToBRL(element.subtotal)}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
