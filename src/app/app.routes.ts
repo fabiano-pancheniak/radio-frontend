@@ -10,11 +10,17 @@ import { adminGuard, userGuard } from './guard/admin.guard';
 import { AuthComponent } from './components/auth/auth/auth.component';
 import { ServicoComponent } from './components/admin/servico/servico.component';
 import { ServicoFormComponent } from './components/admin/servico/servico-form/servico-form.component';
+import { UserHomeComponent } from './components/user-home/user-home.component';
+import { UserParentComponent } from './components/user-parent/user-parent.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
-    {path: 'apoio-cultural', component: ApoioCulturalComponent, canActivate: [userGuard]},
-    {path: 'dados-cadastrais', component: DadosCadastraisComponent, canActivate: [userGuard]},
+    //{path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+    {path: '', component: UserParentComponent, canActivate: [userGuard], children: [
+        {path: '', redirectTo: 'home', pathMatch: 'full'},
+        {path: 'home', component: UserHomeComponent},
+        {path: 'apoio-cultural', component: ApoioCulturalComponent},
+        {path: 'dados-cadastrais', component: DadosCadastraisComponent}
+    ]},
     {path: 'auth', component: AuthComponent, children: [
         {path: 'register', component: RegisterComponent},
         {path: 'login', component: LoginComponent},

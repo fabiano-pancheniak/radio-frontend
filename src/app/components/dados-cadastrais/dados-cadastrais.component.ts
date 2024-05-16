@@ -3,23 +3,29 @@ import { UserService } from '../../services/user.service';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AddressService } from '../../services/address.service';
 import { NgFor } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dados-cadastrais',
   standalone: true,
   imports: [ReactiveFormsModule, NgFor],
-  providers: [{provide: UserService}],
+  providers: [{provide: UserService}, {provide: AuthService}],
   templateUrl: './dados-cadastrais.component.html',
   styleUrl: './dados-cadastrais.component.scss'
 })
 export class DadosCadastraisComponent {
   constructor(){
-    this.getUserData("5844c86f-4c62-4070-9389-314c46a97c19")  
+    this.authService.getUserData(localStorage.getItem('access-token')).subscribe(res => {
+        this.userId = res.id
+        this.getUserData(res.id)
+      }) 
     this.getEstadosList()
   }
   userService = inject(UserService);
   addressService = inject(AddressService);
+  authService = inject(AuthService)
   estadosList: any = []
+  userId: string = ''
 
   profileForm = new FormGroup({
     cpfCnpj: new FormControl(''),
@@ -76,7 +82,7 @@ export class DadosCadastraisComponent {
   }
 
   onSubmit() {
-    this.userService.updateUserInfo(this.profileForm.value, '09abcfed-c17e-456c-9793-138ab970d680').subscribe()
+    this.userService.updateUserInfo(this.profileForm.value, this.userId).subscribe()
   }
 
 }

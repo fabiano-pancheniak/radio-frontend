@@ -42,7 +42,7 @@ export class LoginComponent {
   
   redirectBasedOnRole(role: any) {
     const isAdmin = role === 'ADMIN';
-    const destination = isAdmin ? ['admin/deferir'] : ['apoio-cultural'];
+    const destination = isAdmin ? ['admin/deferir'] : ['home'];
     this.router.navigate(destination);
   }
 
