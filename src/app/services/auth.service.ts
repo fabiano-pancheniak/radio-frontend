@@ -31,6 +31,17 @@ export class AuthService {
     return JSON.parse(jsonPayload);
   }
 
+  isTokenExpired(token: any){
+    if(token){
+      this.parseJwt(token)
+      if (Date.now() >= token.exp * 1000){
+        return false;
+      }
+      return true;
+    }
+    return false
+  }
+
   getUserData(token: any): Observable<any>{
     const userId = this.parseJwt(token).sub
     const headers = this.getHeadersToken()

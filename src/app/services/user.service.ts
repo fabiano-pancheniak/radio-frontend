@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 import { AuthService } from './auth.service';
 
@@ -22,7 +23,15 @@ export class UserService {
 
   updateUserInfo(body: any, userId: String): Observable<User>{
     const headers = this.authService.getHeadersToken()
-    return this.http.patch<User>(`${this.URL}/${userId}`, body, {headers})
+    return this.http.post<User>(`${this.URL}`, body, {headers})
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'An unexpected error occurred';
+    if (error.status === 404) {
+      errorMessage = 'User not found (404)';
+    }
+    return throwError(() => new Error(errorMessage));
   }
 
 }
