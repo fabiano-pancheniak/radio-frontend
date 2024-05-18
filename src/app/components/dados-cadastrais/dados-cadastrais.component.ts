@@ -26,6 +26,7 @@ export class DadosCadastraisComponent {
   authService = inject(AuthService)
   estadosList: any = []
   userId: string = ''
+  userExists: boolean = false
 
   profileForm = new FormGroup({
     cpfCnpj: new FormControl(''),
@@ -36,13 +37,16 @@ export class DadosCadastraisComponent {
     city: new FormControl(''),
     state: new FormControl(''),
     cep: new FormControl(''),
-    phone: new FormControl('')
+    phone: new FormControl(''),
+    //Verificar isso aqui
+    userId: new FormControl('909488bf-3cfb-4cae-8864-a3baa3c994c1')
   });
 
   getUserData(userId: String){
     this.userService.getUserInfo(userId).subscribe({
       next: (value) => {
-        this.profileForm.setValue({
+        this.userExists = true
+        this.profileForm.patchValue({
           cpfCnpj: value.cpfCnpj,
           fullName: value.fullName,
           address: value.address,
@@ -54,8 +58,8 @@ export class DadosCadastraisComponent {
           phone: value.phone
         })
       },
-      error(err) {
-        console.log(err)
+      error: (err) => {
+        this.userExists = false
       },
     })
   }
@@ -82,7 +86,12 @@ export class DadosCadastraisComponent {
   }
 
   onSubmit() {
-    this.userService.updateUserInfo(this.profileForm.value, this.userId).subscribe()
+    //implementar update ou create
+    //cpf é validado unique
+    console.log(this.userExists)
+    console.log(this.profileForm.value)
+    this.userService.createUserInfo(this.profileForm.value).subscribe()
+    //this.userService.updateUserInfo(this.profileForm.value, this.userId).subscribe()
   }
 
 }

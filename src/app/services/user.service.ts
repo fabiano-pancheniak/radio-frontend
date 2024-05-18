@@ -21,6 +21,12 @@ export class UserService {
     return this.http.get<User>(`${this.URL}/${userId}`, {headers})
   }
 
+  createUserInfo(body: any): Observable<User>{
+    const headers = this.authService.getHeadersToken()
+    console.log(headers)
+    return this.http.post<User>(this.URL, body, {headers})
+  }
+
   updateUserInfo(body: any, userId: String): Observable<User>{
     const headers = this.authService.getHeadersToken()
     return this.http.post<User>(`${this.URL}`, body, {headers})
