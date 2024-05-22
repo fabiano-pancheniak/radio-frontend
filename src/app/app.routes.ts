@@ -12,6 +12,7 @@ import { ServicoComponent } from './components/admin/servico/servico.component';
 import { ServicoFormComponent } from './components/admin/servico/servico-form/servico-form.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { UserParentComponent } from './components/user-parent/user-parent.component';
+import { MinhasSolicitacoesComponent } from './components/minhas-solicitacoes/minhas-solicitacoes.component';
 
 export const routes: Routes = [
     //{path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -19,7 +20,8 @@ export const routes: Routes = [
         {path: '', redirectTo: 'home', pathMatch: 'full'},
         {path: 'home', component: UserHomeComponent},
         {path: 'apoio-cultural', component: ApoioCulturalComponent},
-        {path: 'dados-cadastrais', component: DadosCadastraisComponent}
+        {path: 'dados-cadastrais', component: DadosCadastraisComponent},
+        {path: 'minhas-solicitacoes', component: MinhasSolicitacoesComponent}
     ]},
     {path: 'auth', component: AuthComponent, children: [
         {path: 'register', component: RegisterComponent},

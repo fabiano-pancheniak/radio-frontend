@@ -28,4 +28,18 @@
         border-radius: 4px;
         color: rgb(31, 31, 31);
     }
+
+    a{
+        position: relative;
+    }
+
+    .update-profile-notification{
+        background-color: rgb(255, 166, 1);
+        color: orange;
+        position: absolute;
+        top: 0px;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+    }
 }

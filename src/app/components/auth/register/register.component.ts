@@ -15,7 +15,8 @@ export class RegisterComponent {
   
   registerForm = new FormGroup({
     email: new FormControl(''),
-    password: new FormControl('')
+    password: new FormControl(''),
+    cpf: new FormControl('')
   })
 
   onSubmit() {

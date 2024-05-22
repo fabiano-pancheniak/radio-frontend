@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, throwError, Subject } from 'rxjs';
 import { User } from '../interfaces/user';
 import { AuthService } from './auth.service';
 
@@ -15,21 +14,18 @@ export class UserService {
 
   authService = inject(AuthService)
 
+  getUserId(token: string){
+    return this.authService.parseJwt(token).sub
+  }
 
   getUserInfo(userId: String): Observable<User>{
     const headers = this.authService.getHeadersToken()
     return this.http.get<User>(`${this.URL}/${userId}`, {headers})
   }
 
-  createUserInfo(body: any): Observable<User>{
-    const headers = this.authService.getHeadersToken()
-    console.log(headers)
-    return this.http.post<User>(this.URL, body, {headers})
-  }
-
   updateUserInfo(body: any, userId: String): Observable<User>{
     const headers = this.authService.getHeadersToken()
-    return this.http.post<User>(`${this.URL}`, body, {headers})
+    return this.http.patch<User>(`${this.URL}/${userId}`, body, {headers})
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

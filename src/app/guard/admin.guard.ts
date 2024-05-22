@@ -13,15 +13,19 @@ export const adminGuard: CanActivateFn = (route, state) => {
   
   return authService.getUserData(token).pipe(
     map(res => res.role === 'ADMIN')
-    );
+  );
 };
 
 export const userGuard: CanActivateFn = (route, state) => {
   const token = localStorage.getItem('access-token')
   const authService = inject(AuthService)
-  if(token || !authService.isTokenExpired(token)){
-    return true
+  const router = inject(Router)
+
+  if(!authService.isTokenExpired(token)){
+    localStorage.removeItem('access-token')
+    router.navigate(['auth/login'])
+    return false
   }
-  localStorage.removeItem('access-token')
-  return false
+
+  return true  
 };

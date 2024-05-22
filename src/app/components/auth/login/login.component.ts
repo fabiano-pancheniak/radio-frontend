@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { map } from 'rxjs';
 })
 export class LoginComponent {
   authService = inject(AuthService)
+  userService = inject(UserService)
   router = inject(Router)
   
   loginForm = new FormGroup({
@@ -35,13 +37,20 @@ export class LoginComponent {
     
     this.authService.getUserData(token).subscribe({
       next: (userData) => {
-        this.redirectBasedOnRole(userData.role);
+        this.redirectBasedOnRole(userData.role, userData.updatedProfile);
       }
     });
   }
   
-  redirectBasedOnRole(role: any) {
+  redirectBasedOnRole(role: any, isUpdated: boolean) {
     const isAdmin = role === 'ADMIN';
+
+    if(!isUpdated){
+      const destination = isAdmin ? ['admin/deferir'] : ['dados-cadastrais'];
+      this.router.navigate(destination);
+      return
+    }
+
     const destination = isAdmin ? ['admin/deferir'] : ['home'];
     this.router.navigate(destination);
   }
