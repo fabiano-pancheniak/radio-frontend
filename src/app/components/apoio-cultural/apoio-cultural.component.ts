@@ -4,6 +4,7 @@ import { NgFor } from '@angular/common';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ServicoService } from '../../services/ordem-servico/servico.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apoio-cultural',
@@ -14,7 +15,7 @@ import { ServicoService } from '../../services/ordem-servico/servico.service';
   styleUrl: './apoio-cultural.component.scss'
 })
 export class ApoioCulturalComponent{
-  constructor(){ 
+  constructor(private router: Router){ 
     this.getServicos()
   }
   servicosList: any = []
@@ -48,7 +49,9 @@ export class ApoioCulturalComponent{
   } 
   
   createOrdemServico() {
-    this.apoioCulturalService.createOrdemServico(this.selectedServices, this.filesToUpload).subscribe()
+    this.apoioCulturalService.createOrdemServico(this.selectedServices, this.filesToUpload).subscribe(res => {
+      this.router.navigate([`aceite-digital/${res.id}`])
+    })
   }
 
   onChangeServico(e: any){

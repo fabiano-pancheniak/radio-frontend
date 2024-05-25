@@ -13,6 +13,8 @@ import { ServicoFormComponent } from './components/admin/servico/servico-form/se
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { UserParentComponent } from './components/user-parent/user-parent.component';
 import { MinhasSolicitacoesComponent } from './components/minhas-solicitacoes/minhas-solicitacoes.component';
+import { DetailsComponent } from './components/minhas-solicitacoes/details/details.component';
+import { ContratoComponent } from './components/contrato/contrato.component';
 
 export const routes: Routes = [
     //{path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -21,7 +23,9 @@ export const routes: Routes = [
         {path: 'home', component: UserHomeComponent},
         {path: 'apoio-cultural', component: ApoioCulturalComponent},
         {path: 'dados-cadastrais', component: DadosCadastraisComponent},
-        {path: 'minhas-solicitacoes', component: MinhasSolicitacoesComponent}
+        {path: 'minhas-solicitacoes', component: DeferirComponent},
+        {path: 'minhas-solicitacoes/:id', component: OrdemServicoComponent},
+        {path: 'aceite-digital/:id', component: ContratoComponent}
     ]},
     {path: 'auth', component: AuthComponent, children: [
         {path: 'register', component: RegisterComponent},

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, firstValueFrom  } from 'rxjs';
+import { Observable, firstValueFrom, of, map, catchError  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,7 @@ export class AuthService {
       }
       return true;
     }
-    return false
+    return true
   }
 
   getUserData(token: any): Observable<any>{
@@ -54,6 +54,31 @@ export class AuthService {
       "Authorization": `Bearer ${token}`
     }
     return headers
+  }
+  
+  getUserId(token: string | null){
+    if(token){
+      const userId = this.parseJwt(token).sub
+      return userId
+    }
+
+    return "Token não recebido"
+  }
+
+  isAdmin(): Observable<boolean> {
+    const token = localStorage.getItem('access-token');
+    if (token) {
+      return this.getUserData(token).pipe(
+        map(res => res.role === 'ADMIN'),
+        catchError(err => {
+          console.error('Error fetching user data:', err);
+          return of(false);
+        })
+      );
+    } else {
+      console.error('Token não encontrado');
+      return of(false);
+    }
   }
 
 }

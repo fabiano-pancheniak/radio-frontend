@@ -18,11 +18,5 @@ export class DeferirService {
     const headers = this.authService.getHeadersToken()
     return this.http.get<any>(`${this.baseURL}/ordem-servico`, {headers})
   }
-  
-  getOrdemServicoItems(): Observable<any>{ 
-    const headers = this.authService.getHeadersToken()
-    const ordemServicoId = this.route.snapshot.paramMap.get('id');
-    return this.http.get<any>(`${this.baseURL}/ordem-servico/item/${ordemServicoId}`, {headers})
-  }
 
 }
