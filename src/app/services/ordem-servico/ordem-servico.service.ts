@@ -21,11 +21,11 @@ export class OrdemServicoService {
   */
 
   //implementar verificacao de status
-  /*
- getOrdemServico(ordemServicoId: any): Observable<any>{
+  getOrdemServico(ordemServicoId: any): Observable<any>{
+    const headers = this.authService.getHeadersToken();
+    return this.httpClient.get(`${this.URL}/${ordemServicoId}`, {headers})
+  }
 
- }
-  */
  
   getOrdemServicoByUser(userId: any): Observable<any> {
     const token = localStorage.getItem('access-token');
@@ -53,4 +53,7 @@ export class OrdemServicoService {
     }
     return this.httpClient.post<any>(`${this.URL}/situacao/${ordemServicoId}`, body, {headers})
   }
+
+
+
 }

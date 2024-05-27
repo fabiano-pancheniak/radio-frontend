@@ -19,4 +19,14 @@ export class DeferirService {
     return this.http.get<any>(`${this.baseURL}/ordem-servico`, {headers})
   }
 
+  setDeferimento(body: any): Observable<any>{
+    const headers = this.authService.getHeadersToken()
+    return this.http.post<any>(`${this.baseURL}/deferimento`, body, {headers})
+  }
+
+  getDeferimentoByOrdemServico(ordemServicoId: any): Observable<any>{
+    const headers = this.authService.getHeadersToken()
+    return this.http.get<any>(`${this.baseURL}/deferimento/${ordemServicoId}`, {headers})
+  }
+
 }

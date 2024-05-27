@@ -22,7 +22,7 @@ export class DeferirComponent{
 
   getOrdensServico(){
     const userId = this.authService.getUserId(localStorage.getItem('access-token'))
-    this.ordemServicoService.getOrdemServico(userId).subscribe({
+    this.ordemServicoService.getOrdemServicoByUser(userId).subscribe({
       next: (value) => { 
         this.ordensServicoList = value
         console.log(this.ordensServicoList)
