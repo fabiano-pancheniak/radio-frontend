@@ -10,5 +10,9 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
   styleUrl: './user-parent.component.scss'
 })
 export class UserParentComponent {
-
+  menuItems: any = [
+    {description: 'Nova solicitação', link: 'apoio-cultural'},
+    {description: 'Minhas solicitações', link: 'minhas-solicitacoes'},
+    {description: 'Meu cadastro', link: 'dados-cadastrais'}
+  ]
 }

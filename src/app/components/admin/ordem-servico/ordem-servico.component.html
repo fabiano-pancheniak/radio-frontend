@@ -17,12 +17,12 @@
             </td>
         </tr>
     </table>
+    <div *ngIf="isAdmin">
     <form [formGroup]="deferimentoForm">
         <label for="observacao">Observação: </label>
         <input id="observacao" type="text" formControlName="observacao">   
     </form>   
     <!--Precisa verificar para as telas de usuário a logica de exibir ou não ordens de serviço--> 
-    <div *ngIf="isAdmin && ordemServico.situacaoId.id == 2">
         <div>
             <button (click)="setDeferimento(true)">Deferir</button>
             <button (click)="setDeferimento(false)">Não deferir</button>

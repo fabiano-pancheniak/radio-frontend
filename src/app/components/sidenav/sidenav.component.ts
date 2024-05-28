@@ -1,28 +1,21 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [RouterModule, NgIf],
+  imports: [RouterModule, NgIf, NgFor],
   providers: [{provide: AuthService}],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent {
-  constructor(private router: Router){
-    this.isUserProfileUpdated()
-  }
+  @Input() items: any = [];
+  constructor(private router: Router){ console.log(this.items)}
   authService = inject(AuthService)
   profileUpdated: boolean = true
-
-  isUserProfileUpdated(){
-    this.authService.getUserData(localStorage.getItem('access-token')).subscribe(res => {
-      this.profileUpdated = res.updatedProfile
-    })
-  } 
 
   logout(){
     localStorage.removeItem('access-token')

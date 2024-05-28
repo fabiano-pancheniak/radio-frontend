@@ -1,11 +1,6 @@
 <div class="sidenav-wrapper">
     <h1>Radio UNC</h1>
     <hr class="divider">
-    <p [routerLink]="['apoio-cultural']">Nova solicitação</p>
-    <p [routerLink]="['minhas-solicitacoes']">Minhas solicitações</p>
-    <p>Títulos a pagar</p>
-    <p [routerLink]="['dados-cadastrais']">
-        Meu cadastro <span class="update-profile-notification" *ngIf="!profileUpdated"></span>
-    </p>
+    <p *ngFor="let item of items" [routerLink]="[item.link]">{{item.description}}</p>
     <p (click)="logout()">Desconectar</p>
 </div>
